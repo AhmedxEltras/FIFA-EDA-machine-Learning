@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>FIFA Player Value Prediction</title>
+</head>
+<body>
+    <h1>Predict FIFA Player Value</h1>
+    <form id="predictionForm">
+        <label for="Overall">Overall:</label>
+        <input type="number" id="Overall" name="Overall"><br>
+        <label for="Potential">Potential:</label>
+        <input type="number" id="Potential" name="Potential"><br>
+        <label for="Age">Age:</label>
+        <input type="number" id="Age" name="Age"><br>
+        <label for="Wage">Wage:</label>
+        <input type="number" id="Wage" name="Wage"><br>
+        <label for="Height">Height:</label>
+        <input type="number" id="Height" name="Height"><br>
+        <label for="Weight">Weight:</label>
+        <input type="number" id="Weight" name="Weight"><br>
+        <button type="submit">Predict</button>
+    </form>
+    <h2>Predicted Value: <span id="predictedValue"></span></h2>
+
+    <script>
+        document.getElementById('predictionForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+            var formData = new FormData(event.target);
+            var data = {};
+            formData.forEach((value, key) => {data[key] = parseFloat(value)});
+            fetch('/predict', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(data)
+            })
+            .then(response => response.json())
+            .then(data => {
+                document.getElementById('predictedValue').innerText = data.Value;
+            });
+        });
+    </script>
+</body>
+</html>
