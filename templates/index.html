@@ -1,28 +1,148 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>FIFA Player Value Prediction</title>
+    <!-- Include Bootstrap CSS -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Include FontAwesome for Icons -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet">
+    <style>
+        body {
+            background-color: #f8f9fa;
+            font-family: Arial, sans-serif;
+        }
+        .hero {
+            background-image: url('local-image.jpg'); /* Replace 'local-image.jpg' with the path to your local image */
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed; /* Keeps the background fixed while scrolling */
+            padding: 100px 0;
+            color: white;
+            text-align: center;
+        }
+        .hero h1 {
+            font-size: 4rem;
+            margin-bottom: 20px;
+        }
+        .container {
+            margin-top: -50px;
+        }
+        .form-group label {
+            font-weight: bold;
+        }
+        .form-group .form-control:focus {
+            border-color: #007bff;
+            box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+        }
+        .prediction-result {
+            margin-top: 20px;
+        }
+        .navbar {
+            margin-bottom: 0;
+        }
+        footer {
+            background-color: #343a40;
+            color: white;
+            padding: 10px 0;
+            position: fixed;
+            width: 100%;
+            bottom: 0;
+            text-align: center;
+        }
+        .btn-predict {
+            background-color: #007bff;
+            border-color: #007bff;
+            transition: background-color 0.3s ease;
+        }
+        .btn-predict:hover {
+            background-color: #0056b3;
+            border-color: #0056b3;
+        }
+    </style>
 </head>
 <body>
-    <h1>Predict FIFA Player Value</h1>
-    <form id="predictionForm">
-        <label for="Overall">Overall:</label>
-        <input type="number" id="Overall" name="Overall"><br>
-        <label for="Potential">Potential:</label>
-        <input type="number" id="Potential" name="Potential"><br>
-        <label for="Age">Age:</label>
-        <input type="number" id="Age" name="Age"><br>
-        <label for="Wage">Wage:</label>
-        <input type="number" id="Wage" name="Wage"><br>
-        <label for="Height">Height:</label>
-        <input type="number" id="Height" name="Height"><br>
-        <label for="Weight">Weight:</label>
-        <input type="number" id="Weight" name="Weight"><br>
-        <button type="submit">Predict</button>
-    </form>
-    <h2>Predicted Value: <span id="predictedValue"></span></h2>
+    <!-- Navbar -->
+    <!-- <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <a class="navbar-brand" href="#">FIFA Predictor</a>
+    </nav> -->
+
+    <!-- Hero Section -->
+    <div class="hero">
+        <h1>FIFA Player Value Prediction</h1>
+        <p>Get insights on your favorite FIFA players</p>
+    </div>
+
+    <!-- Main Container -->
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-md-8">
+                <div class="card">
+                    <div class="card-header">
+                        <h2 class="card-title text-center">Predict FIFA Player Value</h2>
+                    </div>
+                    <div class="card-body">
+                        <form id="predictionForm">
+                            <div class="form-row">
+                                <div class="form-group col-md-6">
+                                    <label for="Overall">Overall: <i class="fas fa-info-circle" data-toggle="tooltip" data-placement="top" title="Player's overall rating"></i></label>
+                                    <input type="number" class="form-control" id="Overall" name="Overall" required>
+                                </div>
+                                <div class="form-group col-md-6">
+                                    <label for="Potential">Potential: <i class="fas fa-info-circle" data-toggle="tooltip" data-placement="top" title="Player's potential rating"></i></label>
+                                    <input type="number" class="form-control" id="Potential" name="Potential" required>
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="form-group col-md-4">
+                                    <label for="Age">Age: <i class="fas fa-info-circle" data-toggle="tooltip" data-placement="top" title="Player's age"></i></label>
+                                    <input type="number" class="form-control" id="Age" name="Age" required>
+                                </div>
+                                <div class="form-group col-md-4">
+                                    <label for="Wage">Wage: <i class="fas fa-info-circle" data-toggle="tooltip" data-placement="top" title="Player's wage"></i></label>
+                                    <input type="number" class="form-control" id="Wage" name="Wage" required>
+                                </div>
+                                <div class="form-group col-md-4">
+                                    <label for="Height">Height: <i class="fas fa-info-circle" data-toggle="tooltip" data-placement="top" title="Player's height (in cm)"></i></label>
+                                    <input type="number" class="form-control" id="Height" name="Height" required>
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="form-group col-md-4">
+                                    <label for="Weight">Weight: <i class="fas fa-info-circle" data-toggle="tooltip" data-placement="top" title="Player's weight (in kg)"></i></label>
+                                    <input type="number" class="form-control" id="Weight" name="Weight" required>
+                                </div>
+                            </div>
+                            <button type="submit" class="btn btn-primary btn-block btn-predict">Predict</button>
+                        </form>
+                        <div class="prediction-result text-center">
+                            <h2>Predicted Value: <span id="predictedValue"></span></h2>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <!-- <footer>
+        <p>&copy; 2024 FIFA Predictor. Ahmed Eltras.</p>
+    </footer> -->
+
+    <!-- Include Bootstrap JS and dependencies -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+    <!-- FontAwesome Icons Script -->
+    <script src="https://kit.fontawesome.com/a076d05399.js"></script>
 
     <script>
+        $(function () {
+            $('[data-toggle="tooltip"]').tooltip();
+        });
+
         document.getElementById('predictionForm').addEventListener('submit', function(event) {
             event.preventDefault();
             var formData = new FormData(event.target);
