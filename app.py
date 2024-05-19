@@ -1,4 +1,4 @@
-from flask import Flask, request, jsonify
+from flask import Flask, request, jsonify, render_template
 import joblib
 import numpy as np
 
@@ -7,6 +7,10 @@ app = Flask(__name__)
 # Load the model and scaler
 knn_model = joblib.load('knn_model.pkl')
 scaler = joblib.load('scaler.pkl')
+
+@app.route('/')
+def home():
+    return render_template('index.html')
 
 @app.route('/predict', methods=['POST'])
 def predict():

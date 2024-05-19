@@ -27,7 +27,7 @@
             event.preventDefault();
             var formData = new FormData(event.target);
             var data = {};
-            formData.forEach((value, key) => {data[key] = parseFloat(value)});
+            formData.forEach((value, key) => { data[key] = parseFloat(value) });
             fetch('/predict', {
                 method: 'POST',
                 headers: {
